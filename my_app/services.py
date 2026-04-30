@@ -5,12 +5,6 @@ from django.core.exceptions import ValidationError
 from datetime import timedelta
 from .models import ExamAttempt, Answer, Question, Choice
 
-def validate_timer(attempt):
-    """Checks if the student has exceeded the exam duration."""
-    limit = attempt.start_time + timedelta(minutes=attempt.exam.duration)
-    if timezone.now() > limit:
-        submit_exam(attempt)
-        raise ValidationError("Time limit exceeded. Exam has been auto-submitted.")
 
 def start_exam(user, exam):
     # Double check for existing attempts to prevent race conditions
@@ -75,3 +69,11 @@ def submit_exam(attempt):
         attempt.save()
 
     return attempt
+
+
+def validate_timer(attempt):
+    """Checks if the student has exceeded the exam duration."""
+    limit = attempt.start_time + timedelta(minutes=attempt.exam.duration)
+    if timezone.now() > limit:
+        submit_exam(attempt)
+        raise ValidationError("Time limit exceeded. Exam has been auto-submitted.")

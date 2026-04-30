@@ -5,7 +5,8 @@ from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-from .serializers import RegisterSerializer, UserSerializer
+from .serializers import RegisterSerializer, UserSerializer, LoginRequestSerializer
+from drf_spectacular.utils import extend_schema
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
@@ -14,6 +15,11 @@ class RegisterView(generics.CreateAPIView):
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
+    @extend_schema(
+        request=LoginRequestSerializer,
+        responses={200: UserSerializer},
+        description="Login with username and password to receive JWT tokens."
+    )
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
