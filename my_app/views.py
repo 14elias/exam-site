@@ -164,7 +164,9 @@ class ExamViewSet(viewsets.ViewSet):
             data.append({
                 "id": exam.id,
                 "title": exam.title,
+                "description": exam.description,
                 "duration": exam.duration,
+                "total_marks": exam.total_marks,
                 "status": status,
                 "attempt_id": attempt_id
             })

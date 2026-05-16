@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Exam from "./pages/Exam";
 import Home from "./pages/Home";
+import StudentDashboard from "./pages/StudentDashboard";
+import Exam from "./pages/Exam";
 
 function App() {
   return (
@@ -14,10 +14,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route 
-            path="/dashbord" 
+            path="/dashboard" 
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <StudentDashboard />
               </ProtectedRoute>
             } 
           />

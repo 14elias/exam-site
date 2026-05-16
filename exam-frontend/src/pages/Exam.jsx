@@ -57,7 +57,7 @@ export default function Exam() {
 
   const submitExam = async () => {
     await api.post(`/exam/exam/${id}/submit/`);
-    navigate("/dashboard");
+    navigate("/dashbord");
     alert("Exam Submitted Successfully!");
   };
 
